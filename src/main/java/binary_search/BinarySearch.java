@@ -16,11 +16,15 @@ public class BinarySearch {
 	 */
 	public static void main(String[] args) {
 
-		int targetNumber = 22; // Targeted number to get position
+		int targetNumber = 99; // Targeted number to get position
 		int[] numArr = {2, 4, 8, 13, 14, 17, 19, 22, 23, 25, 30, 32, 34, 35, 36, 38, 41, 44, 45, 46, 49};
 
-		System.out.print("The target number : " + targetNumber + " is at position (" + binarySearch(numArr,
-				targetNumber) + ")");
+		int position = binarySearch(numArr, targetNumber); // Get target numbers position
+		if (position != -1) {
+			System.out.print("The target number : " + targetNumber + " is at position (" + position + ")");
+		} else {
+			System.out.println("The number : " + targetNumber + " was not found in the array");
+		}
 	}
 
 	/**
