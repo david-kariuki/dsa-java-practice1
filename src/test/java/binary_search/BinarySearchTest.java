@@ -2,6 +2,10 @@
  * Class with tests for the BinarySearch class
  *
  * @author David Kariuki
+ * @see #testBinarySearchReturn()
+ * @see BinarySearch#binarySearch(Type, Type)
+ * @see BinarySearch#findBooleanBoundary(Type, Type)
+ * @see BinarySearch#getFirstElementNotSmallerThanTarget(Type, Type)
  * @since 14/7/2022
  */
 
@@ -15,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 public class BinarySearchTest {
 
 	/**
-	 * Method to test if binary search was successful
+	 * Method to test successful binary search with message from Supplier<String>
 	 */
 	@Test
 	void testBinarySearchReturn() {
@@ -37,6 +41,5 @@ public class BinarySearchTest {
 		assertNotEquals(-1, BinarySearch.findBooleanBoundary(boolArray, targetBoundary),
 				() -> "Binary search should return index from integer array");
 	}
-
 
 }
