@@ -33,7 +33,7 @@ public class BinarySearch {
 
 		// Binary search with boolean array
 		boolean targetBoolean = true;
-		boolean[] boolArray = {true, true, false, false, false, true, true};
+		boolean[] boolArray = new boolean[]{false, false, false, true, true};
 		int boolIndex = findBooleanBoundary(boolArray, targetBoolean);
 		
 		System.out.print("The boolean boundary for the start of value : " + targetBoolean
