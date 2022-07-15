@@ -2,15 +2,14 @@
  * Class with BinarySearch code
  *
  * @author David Kariuki
+ * @see #binarySearch(Type, Type)
+ * @see #findBooleanBoundary(Type, Type)
+ * @see #getFirstElementNotSmallerThanTarget(Type, Type)
  * @since 14/7/2022
  */
 
 package binary_search;
 
-import lombok.extern.slf4j.Slf4j;
-
-
-@Slf4j
 public class BinarySearch {
 
 	/**
@@ -20,24 +19,39 @@ public class BinarySearch {
 	 */
 	public static void main(String[] args) {
 
-		// Binary search with in t array
-		int targetNumber = 99; // Targeted number to get index
-		int[] numArr = {2, 4, 8, 13, 14, 17, 19, 22, 23, 25, 30, 32, 34, 35, 36, 38, 41, 44, 45, 46, 49};
+		// Shared values
+		int[] intArr = {2, 4, 8, 13, 14, 17, 19, 22, 23, 25, 30};
+		int targetInt = 14; // Targeted number to get index
+		boolean[] boolArray = new boolean[]{false, false, false, true, true};
+		boolean targetBoolean = true;
+		int index;
 
-		int numIndex = binarySearch(numArr, targetNumber); // Get target numbers index
-		if (numIndex != -1) {
-			System.out.print("The target number : " + targetNumber + " is at index (" + numIndex + ")");
+		// Binary search with in t array
+		index = binarySearch(intArr, targetInt); // Get target numbers index
+		if (index != -1) {
+			System.out.print("The target number : " + targetInt + " is at index (" + index + ")" + "\n\n\n");
 		} else {
-			System.out.println("The number : " + targetNumber + " was not found in the array");
+			System.out.println("The number : " + targetInt + " was not found in the int array" + "\n\n\n");
 		}
 
 		// Binary search with boolean array
-		boolean targetBoolean = true;
-		boolean[] boolArray = new boolean[]{false, false, false, true, true};
-		int boolIndex = findBooleanBoundary(boolArray, targetBoolean);
-		
-		System.out.print("The boolean boundary for the start of value : " + targetBoolean
-				+ " is at pos { " + boolIndex + " }");
+		index = findBooleanBoundary(boolArray, targetBoolean);
+
+		if (index != -1) {
+			System.out.print("The boolean boundary for the start of value : " + targetBoolean
+					+ " is at pos { " + index + " }" + "\n\n\n");
+		} else {
+			System.out.println("The boolean : " + targetBoolean + " was not found in the boolean array" + "\n\n\n");
+		}
+
+		// Get element not smaller than target
+		index = getFirstElementNotSmallerThanTarget(intArr, targetInt);
+		if (index != -1) {
+			System.out.print("The first element not smaller than the target number : " + targetInt
+					+ " is at index (" + index + ") and the number is : " + intArr[index] + "\n\n\n");
+		} else {
+			System.out.println("The number : " + targetInt + " was not found in the int array" + "\n\n\n");
+		}
 	}
 
 	/**
@@ -47,9 +61,10 @@ public class BinarySearch {
 	 * @param target - Target number to get index
 	 * @return int - Index/-1
 	 *
+	 * <p>
 	 * PROBLEM STATEMENT
 	 * Given a sorted array of integers and an integer called target, find the element that equals the
-	 * target and return its index..
+	 * target and return its index.
 	 */
 	public static int binarySearch(int[] arr, int target) {
 
@@ -83,10 +98,12 @@ public class BinarySearch {
 
 	/**
 	 * Method to find array boundary
-	 * @param arr - Boolean array
+	 *
+	 * @param arr    - Boolean array
 	 * @param target - Target boolean to get start index (Boundary)
 	 * @return int - Index(Boundary) / -1
 	 *
+	 * <p>
 	 * PROBLEM STATEMENT
 	 * An array of boolean values is divided into two sections: the left section consists of all false,
 	 * and the right section consists of all true. Find the boundary of the right section,
@@ -115,4 +132,42 @@ public class BinarySearch {
 		return boundaryIndex;
 	}
 
+	/**
+	 * Method to get the index of the first element not smaller than target from an int array
+	 *
+	 * @param arr    - int array
+	 * @param target - Targeted int
+	 * @return int - Index(Boundary) / -1
+	 *
+	 * <p>
+	 * PROBLEM STATEMENT
+	 * Given an array of integers sorted in increasing order and a target, find the index of the first
+	 * element in the array that is larger or equal to the target. Assume that it is guaranteed to find
+	 * a satisfying number.
+	 */
+	public static int getFirstElementNotSmallerThanTarget(int[] arr, int target) {
+
+		int start = 0; // Get array starting point
+		int end = arr.length - 1; // get arrays end point
+		int boundaryIndex = -1;
+
+		// Loop through array
+		while (start <= end) {
+
+			int mid = start + (end - start) / 2; // Calculate arrays midpoint
+
+			// Check if element at midpoint is greater or equal to target
+			if (arr[mid] >= target) {
+				boundaryIndex = mid;
+				end = mid - 1;
+			}
+
+			// Check if element at midpoint is less than target
+			if (arr[mid] < target) {
+				start = mid + 1;
+			}
+		}
+
+		return boundaryIndex;
+	}
 }
