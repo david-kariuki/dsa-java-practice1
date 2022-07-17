@@ -7,6 +7,7 @@
  * @see #findFirstElementNotSmallerThanTarget(Type, Type)
  * @see #findFirstOccurrence(Type, Type)
  * @see #calculateSquareRoot(Type)
+ * @see #findMinInRotatedArray(Type)
  * @since 14/7/2022
  */
 
@@ -15,6 +16,7 @@ package binary_search;
 public class BinarySearch {
 
     private static int start = 0; // Set all arrays starting point
+    private static int end = 0; // Set all arrays ending point before they are recalculated
 
     /**
      * Main method
@@ -73,6 +75,12 @@ public class BinarySearch {
         System.out.println("The square root of " + sqNum1 + " is : " + BinarySearch.calculateSquareRoot(sqNum1));
         System.out.println("The square root of " + sqNum2 + " is : " + BinarySearch.calculateSquareRoot(sqNum2));
         System.out.println("The square root of " + sqNum3 + " is : " + BinarySearch.calculateSquareRoot(sqNum3));
+
+
+        // Get minimum in rotated sorted array
+        System.out.println("Find minimum rotated :" + BinarySearch.findMinInRotatedArray(new int[]{30, 40, 50, 10, 20}));
+        System.out.println("Find minimum rotated :" + BinarySearch.findMinInRotatedArray(new int[]{0, 1, 2, 3, 4, 5}));
+        System.out.println("Find minimum rotated :" + BinarySearch.findMinInRotatedArray(new int[]{0}));
     }
 
     /**
@@ -89,7 +97,7 @@ public class BinarySearch {
      */
     public static int binarySearch(final int[] arr, final int target) {
 
-        int end = BinarySearch.getArraysEndPoint(arr); // Get the end point of the array
+        end = BinarySearch.getArraysEndPoint(arr); // Get the end point of the array
 
         // Loop through array
         while (start <= end) {
@@ -131,7 +139,7 @@ public class BinarySearch {
      */
     public static int findBooleanBoundary(final boolean[] arr, final boolean target) {
 
-        int end = BinarySearch.getArraysEndPoint(arr); // Get last index
+        end = BinarySearch.getArraysEndPoint(arr); // Get last index
         int boundaryIndex = -1; // Set initial boundary index
 
         // Loop through array
@@ -166,7 +174,7 @@ public class BinarySearch {
      */
     public static int findFirstElementNotSmallerThanTarget(final int[] arr, final int target) {
 
-        int end = BinarySearch.getArraysEndPoint(arr); // Get arrays end point
+        end = BinarySearch.getArraysEndPoint(arr); // Get arrays end point
         int boundaryIndex = -1;
 
         // Loop through array
@@ -203,7 +211,7 @@ public class BinarySearch {
      */
     public static int findFirstOccurrence(final int[] arr, final int target) {
 
-        int end = BinarySearch.getArraysEndPoint(arr); // Get arrays end point
+        end = BinarySearch.getArraysEndPoint(arr); // Get arrays end point
         int boundaryIndex = -1;
 
         while (start <= end) {
@@ -230,7 +238,7 @@ public class BinarySearch {
      * Method to find square root of an integer
      *
      * @param num - Integer to find square root of
-     * @return int - Square root of integer
+     * @return -1 / Square root of integer
      *
      * <p>
      * PROBLEM STATEMENT
@@ -245,7 +253,7 @@ public class BinarySearch {
         } // return 0 for 0 value as square root of 0 is 0
 
         start = 1; // Set starting point
-        int end = num; // Set ending point
+        end = num; // Set ending point
         int squareRoot = -1; // Initialized square root
 
         // Loop through boundary points
@@ -265,7 +273,37 @@ public class BinarySearch {
         return squareRoot;
     }
 
+    /**
+     * Method to find the minimum in rotated sorted array
+     *
+     * @param arr - int array
+     * @return -1/index of minimum value
+     *
+     * <p>
+     * PROBLEM STATEMENT
+     * A sorted array was rotated at an unknown pivot. For example,
+     * [10, 20, 30, 40, 50] becomes [30, 40, 50, 10, 20]. Find the index of the minimum element in this array.
+     */
+    public static int findMinInRotatedArray(int[] arr) {
+        start = 0;
+        end = BinarySearch.getArraysEndPoint(arr); // Calculate array end point
+        int boundaryIndex = -1; // Initialize boundary
 
+        // Loop through the array
+        while (start <= end) {
+
+            int mid = BinarySearch.calculateArraysMidPoint(start, end); // Calculate arrays midpoint
+
+            if (arr[mid] <= arr[getArraysEndPoint(arr)]) {
+                boundaryIndex = mid;
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+
+        return boundaryIndex;
+    }
 
     /**
      * Method to calculate arrays end point
