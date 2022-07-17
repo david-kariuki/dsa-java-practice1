@@ -4,7 +4,9 @@
  * @author David Kariuki
  * @see #binarySearch(Type, Type)
  * @see #findBooleanBoundary(Type, Type)
- * @see #getFirstElementNotSmallerThanTarget(Type, Type)
+ * @see #findFirstElementNotSmallerThanTarget(Type, Type)
+ * @see #findFirstOccurrence(Type, Type)
+ * @see #calculateSquareRoot(Type)
  * @since 14/7/2022
  */
 
@@ -29,7 +31,7 @@ public class BinarySearch {
         int index;
 
         // Binary search with in t array
-        index = binarySearch(intArr, targetInt); // Get target numbers index
+        index = BinarySearch.binarySearch(intArr, targetInt); // Get target numbers index
         if (index != -1) {
             System.out.print("The target number : " + targetInt + " is at index (" + index + ")" + "\n\n\n");
         } else {
@@ -37,7 +39,7 @@ public class BinarySearch {
         }
 
         // Binary search with boolean array
-        index = findBooleanBoundary(boolArray, targetBoolean);
+        index = BinarySearch.findBooleanBoundary(boolArray, targetBoolean);
 
         if (index != -1) {
             System.out.print("The boolean boundary for the start of value : " + targetBoolean
@@ -47,7 +49,7 @@ public class BinarySearch {
         }
 
         // Get element not smaller than target
-        index = getFirstElementNotSmallerThanTarget(intArr, targetInt);
+        index = BinarySearch.findFirstElementNotSmallerThanTarget(intArr, targetInt);
         if (index != -1) {
             System.out.print("The first element not smaller than the target number : " + targetInt
                     + " is at index (" + index + ") and the number is : " + intArr[index] + "\n\n\n");
@@ -56,13 +58,21 @@ public class BinarySearch {
         }
 
         // Get the first occurrence of an in t in an int array
-        index = findFirstOccurrence(intArr, targetInt);
+        index = BinarySearch.findFirstOccurrence(intArr, targetInt);
         if (index != -1) {
             System.out.print("The first occurrence of the target number : " + targetInt
                     + " is at index (" + index + ") and the number is : " + intArr[index] + "\n\n\n");
         } else {
             System.out.println("The number : " + targetInt + " was not found in the int array" + "\n\n\n");
         }
+
+        // Get square root of a number
+        int sqNum1 = 4;
+        int sqNum2 = 8;
+        int sqNum3 = 16;
+        System.out.println("The square root of " + sqNum1 + " is : " + BinarySearch.calculateSquareRoot(sqNum1));
+        System.out.println("The square root of " + sqNum2 + " is : " + BinarySearch.calculateSquareRoot(sqNum2));
+        System.out.println("The square root of " + sqNum3 + " is : " + BinarySearch.calculateSquareRoot(sqNum3));
     }
 
     /**
@@ -79,11 +89,11 @@ public class BinarySearch {
      */
     public static int binarySearch(final int[] arr, final int target) {
 
-        int end = getArraysEndPoint(arr); // Get the end point of the array
+        int end = BinarySearch.getArraysEndPoint(arr); // Get the end point of the array
 
         // Loop through array
         while (start <= end) {
-            int mid = calculateArraysMidPoint(start, end); // Calculate arrays mid point
+            int mid = BinarySearch.calculateArraysMidPoint(start, end); // Calculate arrays mid point
 
             // Check if value at mid, equals to target and return
             if (arr[mid] == target) {
@@ -121,13 +131,13 @@ public class BinarySearch {
      */
     public static int findBooleanBoundary(final boolean[] arr, final boolean target) {
 
-        int end = getArraysEndPoint(arr); // Get last index
+        int end = BinarySearch.getArraysEndPoint(arr); // Get last index
         int boundaryIndex = -1; // Set initial boundary index
 
         // Loop through array
         while (start <= end) {
 
-            int mid = calculateArraysMidPoint(start, end); // Calculate arrays mid point
+            int mid = BinarySearch.calculateArraysMidPoint(start, end); // Calculate arrays mid point
 
             // Check if the target value is at the current midpoint in loop
             if (arr[mid] == target) {
@@ -154,15 +164,15 @@ public class BinarySearch {
      * element in the array that is larger or equal to the target. Assume that it is guaranteed to find
      * a satisfying number.
      */
-    public static int getFirstElementNotSmallerThanTarget(final int[] arr, final int target) {
+    public static int findFirstElementNotSmallerThanTarget(final int[] arr, final int target) {
 
-        int end = getArraysEndPoint(arr); // Get arrays end point
+        int end = BinarySearch.getArraysEndPoint(arr); // Get arrays end point
         int boundaryIndex = -1;
 
         // Loop through array
         while (start <= end) {
 
-            int mid = calculateArraysMidPoint(start, end); // Calculate arrays midpoint
+            int mid = BinarySearch.calculateArraysMidPoint(start, end); // Calculate arrays midpoint
 
             // Check if element at midpoint is greater or equal to target
             if (arr[mid] >= target) {
@@ -193,13 +203,13 @@ public class BinarySearch {
      */
     public static int findFirstOccurrence(final int[] arr, final int target) {
 
-        int end = getArraysEndPoint(arr); // Get arrays end point
+        int end = BinarySearch.getArraysEndPoint(arr); // Get arrays end point
         int boundaryIndex = -1;
 
         while (start <= end) {
 
             // Calculate midpoint
-            int mid = calculateArraysMidPoint(start, end); // Calculate arrays midpoint
+            int mid = BinarySearch.calculateArraysMidPoint(start, end); // Calculate arrays midpoint
 
             // Check if midpoint is equal to target
             if (arr[mid] >= target) {
@@ -215,6 +225,47 @@ public class BinarySearch {
 
         return boundaryIndex;
     }
+
+    /**
+     * Method to find square root of an integer
+     *
+     * @param num - Integer to find square root of
+     * @return int - Square root of integer
+     *
+     * <p>
+     * PROBLEM STATEMENT
+     * Given an integer, find its square root without using the built-in square root function.
+     * Only return the integer part (truncate the decimals).
+     */
+    public static int calculateSquareRoot(int num) {
+
+        // Check if the number is 0
+        if (num == 0) {
+            return 0;
+        } // return 0 for 0 value as square root of 0 is 0
+
+        start = 1; // Set starting point
+        int end = num; // Set ending point
+        int squareRoot = -1; // Initialized square root
+
+        // Loop through boundary points
+        while (start <= end) {
+
+            int mid = BinarySearch.calculateArraysMidPoint(start, end); // Calculate arrays midpoint
+
+            // Check if mid is less than or equal to division of number and midpoint
+            if (mid <= (num / mid)) {
+                squareRoot = mid;
+                start = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+        }
+
+        return squareRoot;
+    }
+
+
 
     /**
      * Method to calculate arrays end point
