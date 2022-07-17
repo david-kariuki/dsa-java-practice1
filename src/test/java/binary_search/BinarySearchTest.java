@@ -8,6 +8,7 @@
  * @see BinarySearch#findFirstElementNotSmallerThanTarget(Type, Type)
  * @see BinarySearch#findFirstOccurrence(Type, Type)
  * @see BinarySearch#calculateSquareRoot(Type)
+ * @see BinarySearch#findMinInRotatedArray(Type)
  * @since 14/7/2022
  */
 
@@ -53,5 +54,8 @@ public class BinarySearchTest {
 
 		// Calculate square root
 		assertNotEquals(-1, BinarySearch.calculateSquareRoot(81), () -> message);
+
+		// Find minimum in rotated sorted array
+		assertNotEquals(-1, BinarySearch.findMinInRotatedArray(numArr));
 	}
 }
