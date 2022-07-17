@@ -5,7 +5,9 @@
  * @see #testBinarySearchReturn()
  * @see BinarySearch#binarySearch(Type, Type)
  * @see BinarySearch#findBooleanBoundary(Type, Type)
- * @see BinarySearch#getFirstElementNotSmallerThanTarget(Type, Type)
+ * @see BinarySearch#findFirstElementNotSmallerThanTarget(Type, Type)
+ * @see BinarySearch#findFirstOccurrence(Type, Type)
+ * @see BinarySearch#calculateSquareRoot(Type)
  * @since 14/7/2022
  */
 
@@ -36,10 +38,20 @@ public class BinarySearchTest {
 
 		String message = "Binary search should return index >= 0 from integer array";
 
+		// Binary search in array
 		assertNotEquals(-1, BinarySearch.binarySearch(numArr, targetNumber), () -> message);
 
+		// Find boolean boundary from boolean array
 		assertNotEquals(-1, BinarySearch.findBooleanBoundary(boolArray, targetBoundary), () -> message);
 
+		// Find first element not smaller than target
+		assertNotEquals(-1, BinarySearch.findFirstElementNotSmallerThanTarget(numArr,
+				targetNumber), () -> message);
+
+		// Find first target's occurrence in int array
 		assertNotEquals(-1, BinarySearch.findFirstOccurrence(numArr, targetNumber), () -> message);
+
+		// Calculate square root
+		assertNotEquals(-1, BinarySearch.calculateSquareRoot(81), () -> message);
 	}
 }
