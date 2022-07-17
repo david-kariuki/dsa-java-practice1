@@ -3,13 +3,14 @@
  *
  * @author David Kariuki <a href="mailto:dkaris.k@gmail.com">David Kariuki</a>
  * @apiNote - Binary search example cases
- * @see #binarySearch(Type, Type)
- * @see #findBooleanBoundary(Type, Type)
- * @see #findFirstElementNotSmallerThanTarget(Type, Type)
- * @see #findFirstOccurrence(Type, Type)
- * @see #calculateSquareRoot(Type)
- * @see #findMinInRotatedArray(Type)
- * @see #findThePeakOfTheMountains(Type))
+ * @see #main(String[])
+ * @see #binarySearch(int[], int) binarySearch
+ * @see #findBooleanBoundary(boolean[], boolean)
+ * @see #findFirstElementNotSmallerThanTarget(int[], int)
+ * @see #findFirstOccurrence(int[], int)
+ * @see #calculateSquareRoot(int)
+ * @see #findMinInRotatedArray(int[])
+ * @see #findThePeakOfTheMountains(int[])
  * @since 14/7/2022
  */
 
