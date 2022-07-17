@@ -1,17 +1,21 @@
 /**
  * Class with BinarySearch code
  *
- * @author David Kariuki
+ * @author David Kariuki <a href="mailto:dkaris.k@gmail.com">David Kariuki</a>
+ * @apiNote - Binary search example cases
  * @see #binarySearch(Type, Type)
  * @see #findBooleanBoundary(Type, Type)
  * @see #findFirstElementNotSmallerThanTarget(Type, Type)
  * @see #findFirstOccurrence(Type, Type)
  * @see #calculateSquareRoot(Type)
  * @see #findMinInRotatedArray(Type)
+ * @see #findThePeakOfTheMountains(Type))
  * @since 14/7/2022
  */
 
 package binary_search;
+
+import utilities.SharedUtils;
 
 public class BinarySearch {
 
@@ -40,6 +44,7 @@ public class BinarySearch {
             System.out.println("The number : " + targetInt + " was not found in the int array" + "\n\n\n");
         }
 
+
         // Binary search with boolean array
         index = BinarySearch.findBooleanBoundary(boolArray, targetBoolean);
 
@@ -50,6 +55,7 @@ public class BinarySearch {
             System.out.println("The boolean : " + targetBoolean + " was not found in the boolean array" + "\n\n\n");
         }
 
+
         // Get element not smaller than target
         index = BinarySearch.findFirstElementNotSmallerThanTarget(intArr, targetInt);
         if (index != -1) {
@@ -59,6 +65,7 @@ public class BinarySearch {
             System.out.println("The number : " + targetInt + " was not found in the int array" + "\n\n\n");
         }
 
+
         // Get the first occurrence of an in t in an int array
         index = BinarySearch.findFirstOccurrence(intArr, targetInt);
         if (index != -1) {
@@ -67,6 +74,7 @@ public class BinarySearch {
         } else {
             System.out.println("The number : " + targetInt + " was not found in the int array" + "\n\n\n");
         }
+
 
         // Get square root of a number
         int sqNum1 = 4;
@@ -81,6 +89,14 @@ public class BinarySearch {
         System.out.println("Find minimum rotated :" + BinarySearch.findMinInRotatedArray(new int[]{30, 40, 50, 10, 20}));
         System.out.println("Find minimum rotated :" + BinarySearch.findMinInRotatedArray(new int[]{0, 1, 2, 3, 4, 5}));
         System.out.println("Find minimum rotated :" + BinarySearch.findMinInRotatedArray(new int[]{0}));
+
+
+        // Get the peak of the mountain
+        System.out.println("The peak of the Mountain is at : "
+                + BinarySearch.findThePeakOfTheMountains(new int[]{0, 1, 2, 3, 4, 3, 2, 1, 0}));
+        System.out.println("The peak of the Mountain is at : "
+                + BinarySearch.findThePeakOfTheMountains(new int[]{4, 5, 6, 7, 8, 7, 6, 5, 4}));
+
     }
 
     /**
@@ -97,11 +113,11 @@ public class BinarySearch {
      */
     public static int binarySearch(final int[] arr, final int target) {
 
-        end = BinarySearch.getArraysEndPoint(arr); // Get the end point of the array
+        end = SharedUtils.calculateArraysEndPoint(arr); // Get the end point of the array
 
         // Loop through array
         while (start <= end) {
-            int mid = BinarySearch.calculateArraysMidPoint(start, end); // Calculate arrays mid point
+            int mid = SharedUtils.calculateArraysMidPoint(start, end); // Calculate arrays mid point
 
             // Check if value at mid, equals to target and return
             if (arr[mid] == target) {
@@ -139,13 +155,13 @@ public class BinarySearch {
      */
     public static int findBooleanBoundary(final boolean[] arr, final boolean target) {
 
-        end = BinarySearch.getArraysEndPoint(arr); // Get last index
+        end = SharedUtils.calculateArraysEndPoint(arr); // Get arrays end point
         int boundaryIndex = -1; // Set initial boundary index
 
         // Loop through array
         while (start <= end) {
 
-            int mid = BinarySearch.calculateArraysMidPoint(start, end); // Calculate arrays mid point
+            int mid = SharedUtils.calculateArraysMidPoint(start, end); // Calculate arrays mid point
 
             // Check if the target value is at the current midpoint in loop
             if (arr[mid] == target) {
@@ -174,13 +190,13 @@ public class BinarySearch {
      */
     public static int findFirstElementNotSmallerThanTarget(final int[] arr, final int target) {
 
-        end = BinarySearch.getArraysEndPoint(arr); // Get arrays end point
+        end = SharedUtils.calculateArraysEndPoint(arr); // Get arrays end point
         int boundaryIndex = -1;
 
         // Loop through array
         while (start <= end) {
 
-            int mid = BinarySearch.calculateArraysMidPoint(start, end); // Calculate arrays midpoint
+            int mid = SharedUtils.calculateArraysMidPoint(start, end); // Calculate arrays midpoint
 
             // Check if element at midpoint is greater or equal to target
             if (arr[mid] >= target) {
@@ -211,13 +227,13 @@ public class BinarySearch {
      */
     public static int findFirstOccurrence(final int[] arr, final int target) {
 
-        end = BinarySearch.getArraysEndPoint(arr); // Get arrays end point
+        end = SharedUtils.calculateArraysEndPoint(arr); // Get arrays end point
         int boundaryIndex = -1;
 
         while (start <= end) {
 
             // Calculate midpoint
-            int mid = BinarySearch.calculateArraysMidPoint(start, end); // Calculate arrays midpoint
+            int mid = SharedUtils.calculateArraysMidPoint(start, end); // Calculate arrays midpoint
 
             // Check if midpoint is equal to target
             if (arr[mid] >= target) {
@@ -259,7 +275,7 @@ public class BinarySearch {
         // Loop through boundary points
         while (start <= end) {
 
-            int mid = BinarySearch.calculateArraysMidPoint(start, end); // Calculate arrays midpoint
+            int mid = SharedUtils.calculateArraysMidPoint(start, end); // Calculate arrays midpoint
 
             // Check if mid is less than or equal to division of number and midpoint
             if (mid <= (num / mid)) {
@@ -286,15 +302,15 @@ public class BinarySearch {
      */
     public static int findMinInRotatedArray(int[] arr) {
         start = 0;
-        end = BinarySearch.getArraysEndPoint(arr); // Calculate array end point
+        end = SharedUtils.calculateArraysEndPoint(arr); // Calculate array end point
         int boundaryIndex = -1; // Initialize boundary
 
         // Loop through the array
         while (start <= end) {
 
-            int mid = BinarySearch.calculateArraysMidPoint(start, end); // Calculate arrays midpoint
+            int mid = SharedUtils.calculateArraysMidPoint(start, end); // Calculate arrays midpoint
 
-            if (arr[mid] <= arr[getArraysEndPoint(arr)]) {
+            if (arr[mid] <= arr[SharedUtils.calculateArraysEndPoint(arr)]) {
                 boundaryIndex = mid;
                 end = mid - 1;
             } else {
@@ -306,33 +322,38 @@ public class BinarySearch {
     }
 
     /**
-     * Method to calculate arrays end point
+     * Method to get the peak of the mountain
      *
      * @param arr - int array
-     * @return int - End point
-     */
-    private static int getArraysEndPoint(final int[] arr) {
-        return arr.length - 1;
-    }
-
-    /**
-     * Method to calculate arrays end point
+     * @return -1 / peak of the mountain
      *
-     * @param arr - boolean array
-     * @return int - End point
+     * <p>
+     * PROBLEM STATEMENT
+     * A mountain array is defined as an array that:
+     * - Has at least 3 elements.
+     * - Has an element with the largest value called the “peak”, at an index k. The array elements monotonically
+     * increase from the first element to A[k], and then monotonically decreases from A[k + 1] to the last element
+     * of the array. Thus creating a “mountain” of numbers.
      */
-    private static int getArraysEndPoint(final boolean[] arr) {
-        return arr.length - 1;
-    }
+    public static int findThePeakOfTheMountains(int[] arr) {
 
-    /**
-     * Method to calculate arrays midpoint
-     *
-     * @param start - Start point
-     * @param end   - End point
-     * @apiNote - Chose formula below to prevent integer overflow (In case incrementing past int_max)
-     */
-    private static int calculateArraysMidPoint(final int start, final int end) {
-        return start + ((end - start) / 2); // return arrays midpoint
+        start = 0; // Set starting index
+        end = SharedUtils.calculateArraysEndPoint(arr); // Get arrays end point
+        int mountainPeak = -1; // Initialize peak
+
+        // Loop through the array
+        while (start <= end) {
+
+            int mid = SharedUtils.calculateArraysMidPoint(start, end); // Calculate arrays midpoint
+
+            if ((mid == SharedUtils.calculateArraysEndPoint(arr)) || (arr[mid] >= arr[mid + 1])) {
+                mountainPeak = mid;
+                end = mid - 1;  // Set new end index
+            } else {
+                start = mid + 1; // Set starting index
+            }
+        }
+
+        return mountainPeak; // Return the peak
     }
 }
