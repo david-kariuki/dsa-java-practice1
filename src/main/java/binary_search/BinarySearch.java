@@ -12,6 +12,8 @@ package binary_search;
 
 public class BinarySearch {
 
+    private static int start = 0; // Set all arrays starting point
+
     /**
      * Main method
      *
@@ -75,16 +77,15 @@ public class BinarySearch {
      * Given a sorted array of integers and an integer called target, find the element that equals the
      * target and return its index.
      */
-    public static int binarySearch(int[] arr, int target) {
+    public static int binarySearch(final int[] arr, final int target) {
 
-        int start = 0; // Start index
-        int end = arr.length - 1; // Get last index
+        int end = getArraysEndPoint(arr); // Get the end point of the array
 
         // Loop through array
         while (start <= end) {
-            int mid = start + ((end - start) / 2);
+            int mid = calculateArraysMidPoint(start, end); // Calculate arrays mid point
 
-            // Check if mid equals to target and return
+            // Check if value at mid, equals to target and return
             if (arr[mid] == target) {
                 return mid; // return numbers index
             }
@@ -120,14 +121,13 @@ public class BinarySearch {
      */
     public static int findBooleanBoundary(final boolean[] arr, final boolean target) {
 
-        int start = 0; // Get array starting point
-        int end = arr.length - 1; // get arrays end point
+        int end = getArraysEndPoint(arr); // Get last index
         int boundaryIndex = -1; // Set initial boundary index
 
         // Loop through array
         while (start <= end) {
 
-            int mid = (start + end) / 2; // Calculate arrays midpoint
+            int mid = calculateArraysMidPoint(start, end); // Calculate arrays mid point
 
             // Check if the target value is at the current midpoint in loop
             if (arr[mid] == target) {
@@ -154,16 +154,15 @@ public class BinarySearch {
      * element in the array that is larger or equal to the target. Assume that it is guaranteed to find
      * a satisfying number.
      */
-    public static int getFirstElementNotSmallerThanTarget(int[] arr, int target) {
+    public static int getFirstElementNotSmallerThanTarget(final int[] arr, final int target) {
 
-        int start = 0; // Get array starting point
-        int end = arr.length - 1; // get arrays end point
+        int end = getArraysEndPoint(arr); // Get arrays end point
         int boundaryIndex = -1;
 
         // Loop through array
         while (start <= end) {
 
-            int mid = start + (end - start) / 2; // Calculate arrays midpoint
+            int mid = calculateArraysMidPoint(start, end); // Calculate arrays midpoint
 
             // Check if element at midpoint is greater or equal to target
             if (arr[mid] >= target) {
@@ -192,17 +191,15 @@ public class BinarySearch {
      * Given a sorted array of integers and a target integer, find the first occurrence of
      * the target and return its index. Return -1 if the target is not in the array.
      */
-    public static int findFirstOccurrence(int[] arr, int target) {
+    public static int findFirstOccurrence(final int[] arr, final int target) {
 
-        int start = 0;
-        int end = arr.length - 1;
+        int end = getArraysEndPoint(arr); // Get arrays end point
         int boundaryIndex = -1;
 
         while (start <= end) {
 
             // Calculate midpoint
-            int mid = start + ((end - start) / 2);
-            System.out.println("Midpoint : " + mid);
+            int mid = calculateArraysMidPoint(start, end); // Calculate arrays midpoint
 
             // Check if midpoint is equal to target
             if (arr[mid] >= target) {
@@ -217,5 +214,36 @@ public class BinarySearch {
         }
 
         return boundaryIndex;
+    }
+
+    /**
+     * Method to calculate arrays end point
+     *
+     * @param arr - int array
+     * @return int - End point
+     */
+    private static int getArraysEndPoint(final int[] arr) {
+        return arr.length - 1;
+    }
+
+    /**
+     * Method to calculate arrays end point
+     *
+     * @param arr - boolean array
+     * @return int - End point
+     */
+    private static int getArraysEndPoint(final boolean[] arr) {
+        return arr.length - 1;
+    }
+
+    /**
+     * Method to calculate arrays midpoint
+     *
+     * @param start - Start point
+     * @param end   - End point
+     * @apiNote - Chose formula below to prevent integer overflow (In case incrementing past int_max)
+     */
+    private static int calculateArraysMidPoint(final int start, final int end) {
+        return start + ((end - start) / 2); // return arrays midpoint
     }
 }
