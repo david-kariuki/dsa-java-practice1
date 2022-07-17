@@ -14,7 +14,7 @@ This is a repository to practice Data Structures and Algorithms using Java.
 
 <br>
 
-| A. BINARY SEARCH |
+| A. **BINARY SEARCH** |
 |-|
 
 | # | EXAMPLE CASE | TIME COMPLEXITY | PROBLEM STATEMENTS |
