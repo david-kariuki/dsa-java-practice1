@@ -13,8 +13,6 @@
  * @since 14/7/2022
  */
 
-package binary_search;
-
 import utilities.SharedUtils;
 
 public class BinarySearch {
